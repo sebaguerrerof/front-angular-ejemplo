@@ -1,0 +1,35 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-body text-center">
+                    <button routerLink="/crear-destinatario" class="btn btn-dark float-start">Nuevo destinatario</button>
+                    <span class="titulo">Listado de transferencias</span>
+                    <button routerLink="/hacer-transferencia" class="btn btn-success float-end">Nueva transferencia</button>
+                    <table *ngIf="listTransferencias.length > 0" class="table table-striped mt-5">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nombre destinatario</th>
+                                <th scope="col">Rut</th>
+                                <th scope="col">Banco</th>
+                                <th scope="col">Tipo de cuenta</th>
+                                <th scope="col">Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transferencia of listTransferencias">
+                                <td scope="row">{{ transferencia.nombre }}</td>
+                                <td>{{ transferencia.rut }}</td>
+                                <td>{{ transferencia.banco }}</td>
+                                <td>{{ transferencia.tipo_cuenta }}</td>
+                                <td>{{ transferencia.monto | currency: 'CL' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 *ngIf="listTransferencias.length == 0">No hay Transferencias realizadas para mostrar</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

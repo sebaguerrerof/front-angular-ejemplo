@@ -1,0 +1,59 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">Realizar transferencia</span>
+                    <button routerLink="/" class="btn btn-secondary float-start">Volver</button>
+                    <form class="mt-5" [formGroup]="formTransferencia" (ngSubmit)="hacerTransferencia()">
+                        <div class="row mt-2">
+                            <div class="col-lg-10 offset-lg-1">
+                                <label for="destinatario">Selecciona un destinatario:</label>
+                                <select [(ngModel)]="seleccionado" (ngModelChange)="destinatarioSelected($event)" id="destinatario" formControlName="destinatario" class="form-control">
+                                    <option *ngFor="let destinatario of listDestinatarios" value="{{ destinatario._id }}">{{ destinatario.nombre }}</option>
+                                </select>
+                                <div class="text-danger"
+                                *ngIf="formTransferencia.get('destinatario')?.hasError('required') && formTransferencia.get('destinatario')?.touched">
+                                    <span>El Destinatario <strong>es obligatorio</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <!-- tabla -->
+                            <div *ngIf="seleccionado" class="col-lg-10 offset-lg-1">
+                                <table class="table table-dark">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Rut</th>
+                                            <th scope="col">Banco</th>
+                                            <th scope="col">Tipo de cuenta</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td scope="row">{{ nombre }}</td>
+                                            <td>{{ rut }}</td>
+                                            <td>{{ banco }}</td>
+                                            <td>{{ tipo_cuenta }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="form-group col-lg-10 offset-lg-1">
+                                <input formControlName="monto" type="number" class="form-control" placeholder="Monto">
+                                <div class="text-danger"
+                                *ngIf="formTransferencia.get('monto')?.hasError('required') && formTransferencia.get('monto')?.touched">
+                                    <span>El Monto <strong>es obligatorio</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button [disabled]="formTransferencia.invalid" type="submit" class="btn btn-success mt-4">Realizar Transferencia</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
